@@ -35,11 +35,11 @@ class _OnGoingState extends State<OnGoing> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   _timer.cancel();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
