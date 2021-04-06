@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:63138284923:android:6c32c7e211dbed6cb669de",
+        "mobilesdk_app_id": "1:63138284923:android:d74a6ede44e8a05ab669de",
         "android_client_info": {
-          "package_name": "com.venti"
+          "package_name": "app.venti"
         }
       },
       "oauth_client": [

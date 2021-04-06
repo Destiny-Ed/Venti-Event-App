@@ -1,4 +1,4 @@
-package com.venti
+package app.venti
 
 import io.flutter.embedding.android.FlutterActivity
 
