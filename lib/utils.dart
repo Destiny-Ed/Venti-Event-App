@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -49,10 +52,38 @@ class NotificationClass {
   }
 }
 
+//Trigger Background notification
+class TriggerLocalNotification {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void callFunction() async {
+    NotificationClass().initializeNotification();
+    print(_auth.currentUser.email);
+
+    FirebaseFirestore.instance
+        .doc(_auth.currentUser.uid)
+        .snapshots()
+        .where((event) => event["date"] == DateTime.now())
+        .map((DocumentSnapshot event) {
+      final String eventName = event.data()["eventName"];
+      final String desc = event.data()["description"];
+      print(eventName);
+
+      //Show Notification
+      NotificationClass().notify(title: eventName, body: desc);
+    });
+  }
+}
+
 class TelephoneSms {
   final Telephony telephony = Telephony.instance;
 
   sendSms({String to, String message}) async {
+    //Request For sms permission
+    await telephony.requestSmsPermissions.then((value) {
+      print(value);
+    });
+
     telephony.sendSms(
         to: to,
         message: message,
@@ -60,5 +91,4 @@ class TelephoneSms {
           return status;
         });
   }
-
 }

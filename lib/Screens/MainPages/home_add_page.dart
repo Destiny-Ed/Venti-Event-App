@@ -151,7 +151,7 @@ class _AddEventPageState extends State<AddEventPage> {
               const SizedBox(
                 height: 30,
               ),
-              formFields(context, "Sending To (Optional)", _sendToController,
+              formFields(context, "+234 859 4573 459 (Optional)", _sendToController,
                   TextInputType.phone),
               const SizedBox(
                 height: 30,

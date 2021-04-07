@@ -4,9 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_count_down/date_count_down.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:venti/Providers/auth_provider.dart';
 import 'package:venti/Providers/database_provider.dart';
-import 'package:venti/Screens/AuthScreen/login.dart';
 import 'package:venti/Screens/MainPages/home_add_page.dart';
 import 'package:venti/utils.dart';
 
@@ -28,9 +26,8 @@ class _OnGoingState extends State<OnGoing> {
     NotificationClass().initializeNotification();
     uid = _auth.currentUser.uid;
 
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
+    _timer =
+        Timer.periodic(const Duration(seconds: 1), (timer) => setState(() {}));
 
     super.initState();
   }
@@ -71,6 +68,7 @@ class _OnGoingState extends State<OnGoing> {
                       NotificationClass().notify(title: eventName, body: desc);
                       break;
                     default:
+                      //Request Sms Permission Here
                       TelephoneSms().sendSms(to: sendTo, message: desc);
                   }
 
@@ -162,9 +160,13 @@ class _OnGoingState extends State<OnGoing> {
         onPressed: () {
           PageRouter(context).openNextPage(page: AddEventPage("add"));
         },
-        label: Row(
-          children: [Icon(Icons.add), Text("Add Event")],
-        ),
+        label: Row(children: [
+          Icon(Icons.add, color: Colors.white),
+          Text(
+            "Add Event",
+            style: TextStyle(color: Colors.white),
+          ),
+        ]),
       ),
     );
   }
